@@ -4,7 +4,7 @@ import (
 	"math/big"
 )
 
-func rs_hash(key string) *big.Int {
+func rsHash(key string) *big.Int {
 	a := big.NewInt(378551)
 	b := big.NewInt(63689)
 	hash_value := big.NewInt(0)
@@ -15,7 +15,7 @@ func rs_hash(key string) *big.Int {
 	return hash_value
 }
 
-func js_hash(key string) *big.Int {
+func jsHash(key string) *big.Int {
 	hash_value := big.NewInt(1315423911)
 	for _, i := range key {
 		// part 1, 2, 3对应(hash_value << 5)，int(rune(i))， (hash_value >> 2)
@@ -30,7 +30,7 @@ func js_hash(key string) *big.Int {
 	return hash_value
 }
 
-func pjw_hash(key string) *big.Int {
+func pjwHash(key string) *big.Int {
 	high_bits := big.NewInt(0)
 	hex_flag_1, _ := new(big.Int).SetString("FFFFFFFF", 16)
 	high_bits.Lsh(hex_flag_1, 28)
@@ -47,7 +47,7 @@ func pjw_hash(key string) *big.Int {
 	return hash_value.And(hash_value, hex_flag_2)
 }
 
-func elf_hash(key string) *big.Int {
+func elfHash(key string) *big.Int {
 	hash_value := big.NewInt(0)
 	for _, i := range key {
 		hash_value.Add(hash_value.Lsh(hash_value, 4), big.NewInt(int64(rune(i))))
@@ -64,7 +64,7 @@ func elf_hash(key string) *big.Int {
 	return hash_value
 }
 
-func bkdr_hash(key string) *big.Int {
+func bkdrHash(key string) *big.Int {
 	seed := big.NewInt(int64(131))
 	hash_value := big.NewInt(0)
 	for _, i := range key {
@@ -73,10 +73,10 @@ func bkdr_hash(key string) *big.Int {
 	return hash_value
 }
 
-func sdbm_hash(key string) *big.Int {
+func sdbmHash(key string) *big.Int {
 	hash_value := big.NewInt(0)
 	for _, i := range key {
-		//hash_value = int(rune(i)) + (hash_value << 6) + (hash_value << 16) - hash_value
+		// hash_value = int(rune(i)) + (hash_value << 6) + (hash_value << 16) - hash_value
 		part_1 := big.NewInt(0) // hash_value << 6
 		part_2 := big.NewInt(0) // hash_value << 16
 		add_1 := big.NewInt(0)
@@ -88,7 +88,7 @@ func sdbm_hash(key string) *big.Int {
 	return hash_value
 }
 
-func djb_hash(key string) *big.Int {
+func djbHash(key string) *big.Int {
 	hash_value := big.NewInt(int64(5381))
 	for _, i := range key {
 		part_1 := big.NewInt(0)
@@ -98,7 +98,7 @@ func djb_hash(key string) *big.Int {
 	return hash_value
 }
 
-func dek_hash(key string) *big.Int {
+func dekHash(key string) *big.Int {
 	hash_value := big.NewInt(int64(len(key)))
 	for _, i := range key {
 		part_1 := big.NewInt(0)
@@ -107,7 +107,7 @@ func dek_hash(key string) *big.Int {
 		hash_value.Xor(part_3.Xor(part_1.Lsh(hash_value, 5), part_2.Rsh(hash_value, 27)),
 			big.NewInt(int64(rune(i))))
 	}
-	//fmt.Println(hash_value)
+	// fmt.Println(hash_value)
 	return hash_value
 }
 

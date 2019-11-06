@@ -5,14 +5,12 @@ import (
 	"math/big"
 )
 
-
-
 type Bloom struct {
 	r redis.Conn
 }
 
 var hashFuncs = []func(string) *big.Int{
-	rs_hash, js_hash, pjw_hash, elf_hash, bkdr_hash, sdbm_hash, djb_hash, dek_hash,
+	rsHash, jsHash, pjwHash, elfHash, bkdrHash, sdbmHash, djbHash, dekHash,
 }
 
 func random_generator(hash_value *big.Int) *big.Int {
