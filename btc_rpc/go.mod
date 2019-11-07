@@ -1,4 +1,4 @@
-module btc_rpc
+module github.com/sectoken-dev/tools/btc_rpc
 
 go 1.13
 
