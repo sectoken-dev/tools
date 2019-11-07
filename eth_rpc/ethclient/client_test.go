@@ -1,4 +1,4 @@
-package eth_rpc
+package ethclient
 
 import (
 	"context"
