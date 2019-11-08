@@ -28,6 +28,10 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 )
 
+var (
+    max_path_size = 108
+)
+
 // ipcListen will create a Unix socket on the given endpoint.
 func ipcListen(endpoint string) (net.Listener, error) {
 	if len(endpoint) > int(max_path_size) {
