@@ -175,7 +175,10 @@ func (hc *httpConn) doRequest(ctx context.Context, msg interface{}) (io.ReadClos
 	req := hc.req.WithContext(ctx)
 	req.Body = ioutil.NopCloser(bytes.NewReader(body))
 	req.ContentLength = int64(len(body))
-	
+	filterIDInterface := ctx.Value("filter_id")
+	if filterID, ok := filterIDInterface.(string); ok {
+		req.Header.Set("filter_id", filterID)
+	}
 	resp, err := hc.client.Do(req)
 	if err != nil {
 		return nil, err
