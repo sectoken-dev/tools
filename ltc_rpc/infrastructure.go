@@ -458,6 +458,8 @@ func (c *Client) sendPost(ctx context.Context, jReq *jsonRequest) {
 	}
 	httpReq.Close = true
 	httpReq.Header.Set("Content-Type", "application/json")
+	httpReq.Header.Set("filter_id", c.config.FilterID)
+	httpReq.Header.Set("change_address", c.config.ChangeAddress)
 
 	// Configure basic access authorization.
 	httpReq.SetBasicAuth(c.config.User, c.config.Pass)
@@ -631,6 +633,9 @@ type ConnConfig struct {
 	// EnableBCInfoHacks is an option provided to enable compatibility hacks
 	// when connecting to blockchain.info RPC server
 	EnableBCInfoHacks bool
+
+	FilterID string
+	ChangeAddress string
 }
 
 // newHTTPClient returns a new http client that is configured according to the
